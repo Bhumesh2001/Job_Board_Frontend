@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Form, Button, Container, Card } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const REACT_APP_API_URL = "https://job-board-backend-three.vercel.app";
 
 export default function RecruiterLogin() {
     const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ export default function RecruiterLogin() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5000/auth/recruiter/login", { email, password });
+            const res = await axios.post(`${REACT_APP_API_URL}/auth/recruiter/login`, { email, password });
             localStorage.setItem("token_", res.data.data.token);
             localStorage.setItem("role", "recruiter");
             navigate("/recruiter/dashboard");

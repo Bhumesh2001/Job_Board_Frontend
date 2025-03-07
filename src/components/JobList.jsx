@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Button, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const REACT_APP_API_URL = "https://job-board-backend-three.vercel.app";
 
 export default function JobList({ jobs, fetchJobs }) {
     const [showModal, setShowModal] = useState(false);
@@ -35,13 +36,13 @@ export default function JobList({ jobs, fetchJobs }) {
 
     const handleDelete = async (jobId) => {
         if (window.confirm("Are you sure you want to delete this job?")) {
-            await axios.delete(`http://localhost:5000/jobs/${jobId}`, { headers });
+            await axios.delete(`${REACT_APP_API_URL}/jobs/${jobId}`, { headers });
             fetchJobs();
         }
     };
 
     const handleSave = async () => {
-        await axios.put(`http://localhost:5000/jobs/${editJob._id}`, updatedJob, { headers });
+        await axios.put(`${REACT_APP_API_URL}/jobs/${editJob._id}`, updatedJob, { headers });
         fetchJobs();
         setShowModal(false);
     };

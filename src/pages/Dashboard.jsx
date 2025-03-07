@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import JobList from "../components/JobList";
 import ApplicationList from "../components/ApplicationList";
 import PostJobModal from "../components/PostJobModal";
+const REACT_APP_API_URL = "https://job-board-backend-three.vercel.app";
 
 export default function RecruiterDashboard() {
     const [jobs, setJobs] = useState([]);
@@ -19,7 +20,7 @@ export default function RecruiterDashboard() {
 
     const fetchJobs = async () => {
         const token = localStorage.getItem("token_");
-        const res = await axios.get("http://localhost:5000/jobs/my-jobs", {
+        const res = await axios.get(`${REACT_APP_API_URL}/jobs/my-jobs`, {
             headers: { Authorization: `Bearer ${token}` }
         });
         setJobs(res.data.data);
@@ -27,7 +28,7 @@ export default function RecruiterDashboard() {
 
     const fetchApplications = async () => {
         const token = localStorage.getItem("token_");
-        const res = await axios.get("http://localhost:5000/applications/view", {
+        const res = await axios.get(`${REACT_APP_API_URL}/applications/view`, {
             headers: { Authorization: `Bearer ${token}` }
         });
         setApplications(res.data.data);

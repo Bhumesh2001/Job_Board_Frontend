@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Form, Button, Alert } from "react-bootstrap";
 import axios from "axios";
+const REACT_APP_API_URL = "https://job-board-backend-three.vercel.app";
 
 export default function PostJobModal({ show, handleClose, fetchJobs }) {
     const [newJob, setNewJob] = useState({ title: "", description: "", company: "", status: "Open" });
@@ -11,7 +12,7 @@ export default function PostJobModal({ show, handleClose, fetchJobs }) {
         setError("");
         try {
             const token = localStorage.getItem("token_");
-            await axios.post("http://localhost:5000/jobs", newJob, {
+            await axios.post(`${REACT_APP_API_URL}/jobs`, newJob, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchJobs();

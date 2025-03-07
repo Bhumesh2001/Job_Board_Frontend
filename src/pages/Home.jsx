@@ -3,6 +3,7 @@ import axios from "axios";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import JobCard from "../components/JobCard";
 import { useNavigate } from "react-router-dom";
+const REACT_APP_API_URL = "https://job-board-backend-three.vercel.app";
 
 export default function Home() {
     const [jobs, setJobs] = useState([]);
@@ -10,7 +11,7 @@ export default function Home() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("http://localhost:5000/jobs")
+        axios.get(`${REACT_APP_API_URL}/jobs`)
             .then((res) => setJobs(res.data.data))
             .catch(console.error);
 

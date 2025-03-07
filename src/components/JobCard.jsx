@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Card, Button, Modal, Form } from "react-bootstrap";
+const REACT_APP_API_URL = "https://job-board-backend-three.vercel.app";
 
 export default function JobCard({ job }) {
     const [showModal, setShowModal] = useState(false);
@@ -39,7 +40,7 @@ export default function JobCard({ job }) {
 
         try {
             const token = localStorage.getItem("token");
-            await axios.post("http://localhost:5000/applications", formData, {
+            await axios.post(`${REACT_APP_API_URL}/applications`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${token}`,
